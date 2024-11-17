@@ -1,0 +1,26 @@
+services:
+  app-salon-backend:
+    image: hia-backend
+    ports:
+      - "4000:4000"
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/app-salon
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+  app-salon-frontend:
+    image: hia-frontend
+    ports:
+      - "8080:80"
+    depends_on:
+      - app-salon-backend
+
+volumes:
+  mongo-data:
