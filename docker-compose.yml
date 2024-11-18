@@ -28,14 +28,15 @@ services:
     environment:
       MONGO_URI: mongodb://mongodb:27017/app-salon
     volumes:
-      - ./backend/.env:/app/.env
+      - ../hia-backend-node/.env:/app/.env
+    command: sh -c "npm run seed:import && npm run dev"
 
   frontend:
     image: maurii9070/hia-frontend-test:latest
     ports:
       - "3000:3000"
     volumes:
-      - ./frontend/.env.local:/app/.env.local
+      - ../hia-frontend-vuejs/.env.local:/app/.env.local
 
   watchtower:
     image: containrrr/watchtower
